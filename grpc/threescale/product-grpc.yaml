@@ -4,6 +4,8 @@ metadata:
   name: grpc-helloworld
 spec:
   name: "gRPC API"
+  providerAccountRef:
+    name: 3scale-admin-secret
   applicationPlans:
     plan_basic:
       name: "Basic gRPC Plan"

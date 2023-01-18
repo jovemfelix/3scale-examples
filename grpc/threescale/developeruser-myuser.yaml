@@ -8,5 +8,7 @@ spec:
   email: myusername01@example.com
   passwordCredentialsRef:
     name: myusername
+  providerAccountRef:
+    name: 3scale-admin-secret
   role: admin
   username: myusername01

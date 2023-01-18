@@ -4,3 +4,5 @@ metadata:
   name: developeraccount01
 spec:
   orgName: Developer
+  providerAccountRef:
+    name: 3scale-admin-secret

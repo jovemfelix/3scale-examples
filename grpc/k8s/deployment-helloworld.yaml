@@ -4,6 +4,7 @@ metadata:
   labels:
     app: grpc-helloworld
   name: grpc-helloworld
+  namespace: grpc
 spec:
   selector:
     matchLabels:
@@ -46,3 +47,4 @@ spec:
   ports:
   - port: 9000
     targetPort: 9000
+    name: grpc

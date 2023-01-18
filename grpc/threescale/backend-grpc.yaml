@@ -11,3 +11,5 @@ spec:
   name: gRPC API
   privateBaseURL: 'https://grpc-helloworld.grpc.svc.cluster.local:9000'
   systemName: grpcapi
+  providerAccountRef:
+    name: 3scale-admin-secret
