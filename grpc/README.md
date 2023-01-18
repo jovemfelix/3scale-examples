@@ -78,7 +78,7 @@ This will create the `user_key` required to authenticate a test client.
 
 ## Testing
 
-### Plain Service GRPC: without 3scale
+### Service Plain: without 3scale
 
 ```shell
 # expose de service through a route
@@ -119,7 +119,7 @@ service Greeter {
 
 
 
-## Service GRPC: with 3scale
+### Service GRPC: with 3scale
 
 Get the testing URL from the Product configuration and use postman to run a request. 
 
@@ -130,7 +130,33 @@ You will be able to check the analytics in 3scale after a successful call.
 
 If you want, you can add a limit to the plan or create a new plan that as some limits on the calls to the `SayHello` method.
 
+```shell
+❯ grpcurl -vv -H 'user_key: 6f9c59e2687d02418cc82b9ee6b5296a' -d '{"name": "Maria"}' -import-path . -proto ./grpc-helloworld/src/main/proto/helloworld.proto -insecure $ADDRESS:443 helloworld.Greeter/SayHello
 
+Resolved method descriptor:
+// Sends a greeting
+rpc SayHello ( .helloworld.HelloRequest ) returns ( .helloworld.HelloReply );
+
+Request metadata to send:
+user_key: 6f9c59e2687d02418cc82b9ee6b5296a
+
+Response headers received:
+content-type: application/grpc
+date: Tue, 17 Jan 2023 21:46:52 GMT
+grpc-accept-encoding: gzip
+server: openresty
+
+Estimated response size: 31 bytes
+
+Response contents:
+{
+  "message": "Hello Maria have a great day!"
+}
+
+Response trailers received:
+(empty)
+Sent 1 request and received 1 response
+```
 
 
 

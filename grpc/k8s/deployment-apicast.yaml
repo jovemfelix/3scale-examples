@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: "apicast"
+  labels:
+    app: apicast
+    name: "apicast"
+spec:
+  selector:
+    matchLabels:
+      deployment: apicast
+  template:
+    metadata:
+      labels:
+        deployment: apicast
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: gateway
+          image: registry.redhat.io/3scale-amp2/apicast-gateway-rhel8:3scale2.12
+          imagePullPolicy: Always
+          ports:
+            - name: proxy
+              port: 8080
+              protocol: TCP
+              containerPort: 8080
+            - name: proxy-tls
+              port: 8043
+              protocol: TCP
+              containerPort: 8043
+            - name: management
+              port: 8090
+              protocol: TCP
+              containerPort: 8090
+          env:
+            - name: THREESCALE_PORTAL_ENDPOINT
+              value: >-
+                https://V7pLT4rijiXL5FhY@3scale-admin.apps.k8sstgbb103.desenv.bb.com.br
+            - name: THREESCALE_DEPLOYMENT_ENV
+              value: staging
+            - name: APICAST_CONFIGURATION_LOADER
+              value: lazy
+            - name: APICAST_LOG_LEVEL
+              value: debug
+            - name: APICAST_PATH_ROUTING
+              value: 'true'
+            - name: APICAST_CONFIGURATION_CACHE
+              value: '0'
+            - name: OPENSSL_VERIFY
+              value: 'false'
+            - name: APICAST_EXTENDED_METRICS
+              value: 'true'
+            - name: APICAST_MANAGEMENT_API
+              value: debug
+            - name: APICAST_HTTPS_PORT
+              value: '8043'
+  replicas: 1
